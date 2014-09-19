@@ -77,7 +77,15 @@ def getWordScore(word, n):
     returns: int >= 0
     """
     # TO DO ... <-- Remove this comment when you code this function
-
+    score = 0
+    guessed = len(word)
+    for i in range(guessed):
+        score = score + SCRABBLE_LETTER_VALUES[word[i]]
+    if guessed == n:
+        score = score * guessed + 50
+    else:
+        score = score * guessed
+    return score
 
 
 #
@@ -148,7 +156,10 @@ def updateHand(hand, word):
     returns: dictionary (string -> int)
     """
     # TO DO ... <-- Remove this comment when you code this function
-
+    newHand = dict(hand)
+    for i in word:
+        newHand[i] -= 1;
+    return newHand
 
 
 #
@@ -166,7 +177,17 @@ def isValidWord(word, hand, wordList):
     wordList: list of lowercase strings
     """
     # TO DO ... <-- Remove this comment when you code this function
+    newWordList={}
+    for i in word:
+        newWordList.update({i:word.count(i)})
 
+    if word in wordList:
+        for i in word:
+            if newWordList[i] > hand.get(i, 0):
+                return False
+        return True
+    else:
+        return False
 
 #
 # Problem #4: Playing a hand
@@ -180,7 +201,10 @@ def calculateHandlen(hand):
     returns: integer
     """
     # TO DO... <-- Remove this comment when you code this function
-
+    sum = 0
+    for i in hand:
+        sum = sum + hand[i]
+    return sum
 
 
 def playHand(hand, wordList, n):
@@ -211,7 +235,8 @@ def playHand(hand, wordList, n):
     # As long as there are still letters left in the hand:
     
         # Display the hand
-        
+    print "hello"
+    displayHand(hand)
         # Ask user for input
         
         # If the input is a single period:
@@ -252,9 +277,6 @@ def playGame(wordList):
     2) When done playing the hand, repeat from step 1    
     """
     # TO DO ... <-- Remove this comment when you code this function
-    print "playGame not yet implemented." # <-- Remove this line when you code the function
-   
-
 
 
 #
