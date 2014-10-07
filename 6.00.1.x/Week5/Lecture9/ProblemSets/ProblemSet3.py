@@ -6,21 +6,20 @@ def program1(L):
             multiples.append(x*y)
     return multiples
 
-print program1([1,2,3,4,5])
+#print program1([1,2,3,4,5])
 
 
 def program2(L):
     i = 0
     squares = []
-    i = i+1
     for x in L:
-        i = 1+1
+        print 'hello'
         for y in L:
+            print 'hai'
             i =i +1
             if x == y:
                 squares.append(x*y)
-                i=i+3
-    i =i +1
+                #i=i+3
     print 'i =',i
     return squares
 
@@ -37,4 +36,4 @@ def program3(L1, L2):
     print 'i=',i
     return intersection
 
-print program3([1,2,3,4,5],[10,20,30,40,50])
+#print program3([1,2,3,4,5],[10,20,30,40,50])
