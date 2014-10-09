@@ -23,8 +23,12 @@ class Coordinate(object):
 
 c1 = Coordinate(4, 4)
 c2 = Coordinate(4, 4)
-print str(c1)
 
+# Calls __str__
+print str(c1)
+print c1
+
+# Calls __eq__
 print c1.__eq__(c2)
 print c1 == c2
 
