@@ -24,6 +24,7 @@ class Person(object):
     def __lt__(self, other):
         """return True if self's ame is lexicographically
            less than other's name, and False otherwise"""
+        print 'person lt'
         if self.lastName == other.lastName:
             return self.name < other.name
         return self.lastName < other.lastName
@@ -58,6 +59,7 @@ class MITPerson(Person):
 
     # sorting MIT people uses their ID number, not name!
     def __lt__(self, other):
+        print 'mit lt'
         return self.idNum < other.idNum
 
 p1 = MITPerson('Eric')
@@ -65,13 +67,12 @@ p2 = MITPerson('John')
 p3 = MITPerson('John')
 p4 = Person('John')
 
-# print p1
-# p1.getIdNum()
-# p2.getIdNum()
-# p1 < p2
-# p3 < p2
-# p4 < p1
-
-# p1 < p4
+print p1
+print p1.getIdNum()
+print p2.getIdNum()
+print p1 < p2
+print p3 < p2
+print p4 < p1
+print p1 < p4
 
 
