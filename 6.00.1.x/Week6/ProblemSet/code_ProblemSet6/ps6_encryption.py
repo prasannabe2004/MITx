@@ -4,7 +4,6 @@
 
 import string
 import random
-import re
 
 WORDLIST_FILENAME = "words.txt"
 
@@ -159,7 +158,8 @@ def findBestShift(wordList, text):
     bestwords = 0
     bestshift = 0
     for shift in range(26):
-        list = re.split(',|!|\'| ',applyShift(text, shift))
+        #list = re.split(',|!|\'| ',applyShift(text, shift))
+        list = applyShift(text, shift).split()
         num_of_words = 0
         for word in list:
             if isWord(wordList,word):
