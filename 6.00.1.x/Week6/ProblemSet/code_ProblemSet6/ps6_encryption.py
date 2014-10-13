@@ -4,6 +4,7 @@
 
 import string
 import random
+import re
 
 WORDLIST_FILENAME = "words.txt"
 
@@ -100,7 +101,14 @@ def buildCoder(shift):
     returns: dict
     """
     ### TODO.
-    return "Not yet implemented." # Remove this comment when you code the function
+    dict={}
+    upper = string.ascii_uppercase
+    lower = string.ascii_lowercase
+    for i in range(len(upper)):
+        dict[upper[i]] = upper[(i+shift)%26]
+    for j in range(len(lower)):
+        dict[lower[j]] = lower[(j+shift)%26]
+    return dict
 
 def applyCoder(text, coder):
     """
@@ -111,7 +119,15 @@ def applyCoder(text, coder):
     returns: text after mapping coder chars to original text
     """
     ### TODO.
-    return "Not yet implemented." # Remove this comment when you code the function
+    mystr = ''
+    for i in text:
+        if i in string.uppercase:
+            mystr = mystr + coder[i]
+        elif i in string.lowercase:
+            mystr = mystr + coder[i]
+        else:
+            mystr = mystr + i
+    return mystr
 
 def applyShift(text, shift):
     """
@@ -126,7 +142,7 @@ def applyShift(text, shift):
     """
     ### TODO.
     ### HINT: This is a wrapper function.
-    return "Not yet implemented." # Remove this comment when you code the function
+    return applyCoder(text,buildCoder(shift))
 
 #
 # Problem 2: Decryption
@@ -139,7 +155,19 @@ def findBestShift(wordList, text):
     returns: 0 <= int < 26
     """
     ### TODO
-    return "Not yet implemented." # Remove this comment when you code the function
+
+    bestwords = 0
+    bestshift = 0
+    for shift in range(26):
+        list = re.split(',|!|\'| ',applyShift(text, shift))
+        num_of_words = 0
+        for word in list:
+            if isWord(wordList,word):
+                num_of_words += 1
+        if bestwords < num_of_words:
+            bestwords = num_of_words
+            bestshift = shift
+    return bestshift
 
 def decryptStory():
     """
