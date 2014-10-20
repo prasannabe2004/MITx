@@ -166,9 +166,13 @@ def filterStories(stories, triggerlist):
 
     Returns: a list of only the stories for which a trigger in triggerlist fires.
     """
-    # TODO: Problem 10
-    # This is a placeholder (we're just returning all the stories, with no filtering) 
-    return stories
+    list = []
+    for story in stories:
+        for trigger in triggerlist:
+            if trigger.evaluate(story):
+                list.append(story)
+                break
+    return list
 
 #======================
 # Part 4
@@ -190,7 +194,28 @@ def makeTrigger(triggerMap, triggerType, params, name):
 
     Returns a new instance of a trigger (ex: TitleTrigger, AndTrigger).
     """
-    # TODO: Problem 11
+    print triggerMap
+
+    if triggerType == 'TITLE':
+        Trigger = TitleTrigger(params[0])
+    elif triggerType == 'SUBJECT':
+        Trigger = SubjectTrigger(params[0])
+    elif triggerType == 'SUMMARY':
+        Trigger = SummaryTrigger(params[0])
+    elif triggerType == 'PHRASE':
+        str = ' '.join(params)
+        Trigger = PhraseTrigger(str)
+    elif triggerType == 'NOT':
+        Trigger = NotTrigger(triggerMap[params[0]])
+    elif triggerType == 'AND':
+        Trigger = AndTrigger(triggerMap[params[0]], triggerMap[params[1]])
+    elif triggerType == 'OR':
+        Trigger = OrTrigger(triggerMap[params[0]], triggerMap[params[1]])
+    else:
+        raise ValueError
+    triggerMap[name] = Trigger
+
+    return triggerMap[name]
 
 
 def readTriggerConfig(filename):
@@ -250,7 +275,7 @@ def main_thread(master):
         
         # TODO: Problem 11
         # After implementing makeTrigger, uncomment the line below:
-        # triggerlist = readTriggerConfig("triggers.txt")
+        triggerlist = readTriggerConfig("C:\/Users\/pmohanasundaram\/Documents\/Trashit\/PyCharm\/PythonLearning\/edx\/6.00.1.x\/Week7\/ProblemSet\/code_ProblemSet7\/triggers.txt")
 
         # **** from here down is about drawing ****
         frame = Frame(master)
