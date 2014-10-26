@@ -1,7 +1,7 @@
 k = 0
 def sort4(lst):
     global k
-    k += 1
+    k+=1
     def unite(l1, l2):
         if len(l1) == 0:
             return l2
@@ -19,12 +19,11 @@ def sort4(lst):
         back = sort4(lst[len(lst)/2:])
 
         L = lst[:]  # the next 3 questions assume this line just executed
-        print L
-        print k
+        print L, k
         return unite(front, back)
 
 
-list = [90,80,70,60,50,40,30,20,10,0]
-#list = [0,10,20,30,40,50,60,70,90,100]
+#list = [90,80,70,60,50,40,30,20,10,0]
+list = [0,10,20,30,40,50,60,70,90,100]
 
 print sort4(list)
