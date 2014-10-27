@@ -16,9 +16,6 @@ class Frob(object):
     def myName(self):
         return self.name
 
-
-root = None
-
 def insert(atMe, newFrob):
     """
     atMe: a Frob that is part of a doubly linked list
@@ -26,27 +23,64 @@ def insert(atMe, newFrob):
     This procedure appropriately inserts newFrob into the linked list that atMe is a part of.
     """
     if newFrob.myName() < atMe.myName():
-        #If atMe is root
-        if atMe.getBefore() == None:
-            global root
-            print 'root is empty'
-            newFrob.setBefore(None)
+        node = atMe.getBefore()
+        if node==None:
             atMe.setBefore(newFrob)
             newFrob.setAfter(atMe)
-            root = newFrob
-        #if atMe is mode in between
-        elif atMe.getBefore().myName() < newFrob.myName():
-            atMe.getBefore().setAfter(newFrob)
-            newFrob.setBefore(atMe.getBefore)
+        elif newFrob.myName() > node.myName():
             atMe.setBefore(newFrob)
             newFrob.setAfter(atMe)
-        #if atMe is the last node
+            node.setAfter(newFrob)
+            newFrob.setBefore(node)
         else:
-            insert(atMe.getBefore(), newFrob)
+            insert(node, newFrob)
+    else:
+        node = atMe.getAfter()
+        if node == None:
+            atMe.setAfter(newFrob)
+            newFrob.setBefore(atMe)
+        elif newFrob.myName() < node.myName():
+            atMe.setAfter(newFrob)
+            newFrob.setBefore(atMe)
+            node.setBefore(newFrob)
+            newFrob.setAfter(node)
+        else:
+            insert(node, newFrob)
 
-abc = Frob('abc')
-hij = Frob('hij')
-ghi = Frob('ghi')
+def findFront(start):
+    """
+    start: a Frob that is part of a doubly linked list
+    returns: the Frob at the beginning of the linked list
+    """
+    # Your Code Here
+    if start.getBefore() == None:
+        return start
+    else:
+        return findFront(start.getBefore())
 
-insert(hij, abc)
-printFrob(root)
+eric = Frob('eric')
+andrew = Frob('andrew')
+ruth = Frob('ruth')
+fred = Frob('fred')
+martha = Frob('martha')
+insert(eric, andrew)
+insert(eric, ruth)
+insert(eric, fred)
+insert(ruth, martha)
+
+
+print (andrew.getAfter()).myName()
+print (eric.getAfter()).myName()
+print (fred.getAfter()).myName()
+print (martha.getAfter()).myName()
+
+print
+
+print (ruth.getBefore()).myName()
+print (martha.getBefore()).myName()
+print (fred.getBefore()).myName()
+print (eric.getBefore()).myName()
+
+print
+
+print (findFront(fred)).myName()
