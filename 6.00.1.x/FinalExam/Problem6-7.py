@@ -163,7 +163,10 @@ class Family(object):
         else:
             cousinType = getcousinType(arootTillAncestor, brootTillAncestor)
 
+        #find degree
         degree = abs(len(arootTillAncestor) - len(brootTillAncestor))
+
+        #return values
         #print cousinType, degree
         return cousinType, degree
 
