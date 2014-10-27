@@ -20,8 +20,6 @@ class courseInfo(object):
     def getGrade(self):
         return self.grade
 
-
-
 class edx(object):
     def __init__(self, courses):
         self.myCourses = []
@@ -41,7 +39,9 @@ class edx(object):
         The method does not return a value.
         """
         #   fill in code to set the grade
-        pass
+        for c in self.myCourses:
+            if c.courseName == course:
+                c.setGrade(grade)
 
     def getGrade(self, course="6.02x"):
         """
@@ -53,7 +53,10 @@ class edx(object):
         If `course` was not part of the initialization, returns -1.
         """
         #   fill in code to get the grade
-        pass
+        for c in self.myCourses:
+            if c.courseName == course:
+                return c.getGrade()
+        return -1
 
     def setPset(self, pset, score, course="6.00x"):
         """
@@ -68,8 +71,9 @@ class edx(object):
         and no error is thrown.
         """
         #   fill in code to set the pset
-
-        pass
+        for c in self.myCourses:
+            if c.courseName == course:
+                c.setPset(pset, score)
 
     def getPset(self, pset, course="6.00x"):
         """
@@ -81,8 +85,10 @@ class edx(object):
         If `course` was not part of the initialization, returns -1.
         """
         #   fill in code to get the pset
-        pass
-
+        for c in self.myCourses:
+            if c.courseName == course:
+                return c.getPset(pset)
+        return -1
 
 edX = edx( ["6.00x","6.01x","6.02x"] )
 edX.setPset(1,100)
@@ -93,3 +99,11 @@ edX.setGrade(100)
 
 for c in ["6.00x","6.01x","6.02x"]:
     edX.setGrade(90,c)
+
+for c in ["6.00x", "6.01x", "6.02x"]:
+    print "pset ", edX.getPset(1,c)
+
+for c in ["6.00x", "6.01x", "6.02x"]:
+    print "grade ", edX.getGrade(c)
+
+print dir(edx)[20]
